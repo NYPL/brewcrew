@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="brewstyle.css"></head>
+
+
+<div id="contact-form">
+	<div>
+		<h1>NYPL Brew Crew</h1> 
+		<p>Need more coffee with colleagues in your life? Join NYPL Brew Crew! Every two weeks, you’ll be matched with a new Brew Crew member and sent an invite—<em>automagically</em> based on your Google Calendar availability—to grab a cup of joe.</p>
+	</div>
+		<p id="failure">Something went wrong... Your information wasn't sent.</p>  
+		<p id="success">Thanks! You're now part of the Brew Crew.</p>
+
+		   <form method="post" action="/">
+			<div>
+                       <label for="email">
+		      	<span class="required">Email: *</span>
+		      	<input type="email" id="email" name="email" value="" placeholder="yourname@nypl.org" required="required" tabindex="1" autofocus="autofocus" />
+                       </label>  
+			</div>
+                        <div>
+		      <label for="location">
+		      	<span class="required">Location code: *</span>
+		      	<input type="location" id="location" name="location" value="" placeholder="SASB, MML, etc." tabindex="2" required="required" />
+                      </label>			
+                        </div>
+			<div>		          
+		      <label for="match">
+		      <span class="required">I want to be matched with colleagues... *</span>
+			      <select id="match" name="match" tabindex="3">   
+			         <option value="near">near my location</option>
+			         <option value="anywhere">anywhere at NYPL</option>
+			      </select>
+		      </label>
+			</div>
+			<div>		          
+		      <label for="message">
+		      	<span>By joining Brew Crew, I hope to...</span> 
+		      	<textarea id="message" name="message" placeholder="type your goal here" tabindex="4"></textarea> 
+		      </label>  
+			</div>
+                        <div>
+                         <p><em>By signing up, you agree to allow access to your Google Calendar.</em></p>
+                        </div>
+			<div>		           
+		      <button name="submit" type="submit" id="submit" >Submit</button> 
+			</div>
+		   </form>
+
+	</div>
+
+</html>
