@@ -25,7 +25,7 @@ FLOW = flow_from_clientsecrets(
 
 def index(request):
     return render(
-        request, 'accounts/register.html', {},
+        request, 'accounts/register-success.html', {},
         content_type='text/html; charset=utf-8'
     )
 
