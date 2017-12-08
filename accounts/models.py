@@ -6,6 +6,7 @@ from django.contrib.auth.models import (
 from django.db import models
 
 
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -35,6 +36,17 @@ class UserManager(BaseUserManager):
         return user
 
 
+class Location(models.Model):
+    # SASB, etc.
+    common_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.common_name
+
+        class Meta:
+            ordering = ('common_name', )
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     nickname = models.CharField(max_length=255)
@@ -44,11 +56,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
+    # acceptable locations for this user to meet at
+    locations = models.ManyToManyField(Location)
+
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
     objects = UserManager()
+
+    def __str__(self):
+        #TODO: concatenate name and locations
+        return ('Name: {name}\n'
+        'Locations: {locations}\n'
+        ).format(**self.__dict__)
 
     def get_full_name(self):
         return self.name
@@ -57,3 +78,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.nickname:
             return self.nickname
         return self.name
+
+
