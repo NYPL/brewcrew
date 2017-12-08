@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
-
+from django.contrib.postgres.fields import JSONField
 
 
 class UserManager(BaseUserManager):
@@ -85,3 +85,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.name
 
 
+# TODO: Create a flow object for each user.
+
+class Credential(models.Model):
+    id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    credential = JSONField()
+    expires_at = models.DateTimeField()
