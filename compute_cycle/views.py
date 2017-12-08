@@ -25,6 +25,15 @@ def sasb_users(request):
     return HttpResponse("users")
 
 def find_coffee_match(request):
-    person3, created = User.objects.get_or_create(name="Chancey", email="chancey@nypl.org")
-    find_user_match(person3)
-    return HttpResponse("You Will Coffeeeeeeee")
+    person, created = User.objects.get_or_create(name="Chancey", email="chancey@nypl.org")
+    (person, candidate, new_meeting_1) = find_user_match(person)
+
+    body = "<html><body> %s " % person
+    #body += person
+    body += "</br>You Will Coffeeeeeeee</br> at %s " % new_meeting_1
+    #body += new_meeting_1
+    body += "</br>with</br> %s" % candidate
+    #body += candidate
+    body += "</body></html>"
+
+    return HttpResponse(body)

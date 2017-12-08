@@ -35,10 +35,10 @@ class Meeting(models.Model):
 # search_location_ids should be a lis of integer primary key ids of the Location table
 def get_eligible_users(search_location_ids):
     located_users_queryset = User.objects.filter(locations__in=search_location_ids)
-    print(located_users_queryset.query)
+    #print(located_users_queryset.query)
     located_users = located_users_queryset.all()
-    print("\n\n\n")
-    print(located_users)
+    #print("\n\n\n")
+    #print(located_users)
     return located_users
 
 
@@ -48,6 +48,7 @@ def get_eligible_users(search_location_ids):
 # winnow those users down to those who have not met this person recently.
 # out of that list, select a random user, and return that user
 def find_user_match(person):
+    # TODO: checking in case don't find locations
     eligible_locations = person.locations.all()
 
     # find people in locations person signed up for
@@ -57,10 +58,23 @@ def find_user_match(person):
     for candidate in eligible_users:
         # TODO: returns duplicate meetings, fix
         # Note: the minus makes it a desc order
-        meetings = Meeting.objects.filter(attendees__in=[person, candidate]).order_by('-fulfilled_date')
+        meetings = Meeting.objects.filter(attendees__in=[person, candidate]).order_by('-fulfilled_date').all()
+        if (meetings and meetings.count() > 0):
+            # if the most recent meeting is not recent enough, match these users
+            if (not meetings[0].is_recent()):
+                # create a new meeting, and return the two users and the new meeting
+                tomorrow = timezone.now() + datetime.timedelta(days=1)
+                # TODO: currently not checking whether the proposed location is acceptable to both people
+                new_meeting_1, created = Meeting.objects.get_or_create(proposed_date=timezone.now(), fulfilled_date=tomorrow, location=eligible_locations[0])
+                # TODO: change to only add person if not already in the ManyToMany users field
+                if (created):
+                    new_meeting_1.attendees.add(person)
+                    new_meeting_1.attendees.add(candidate)
+                    new_meeting_1.save()
 
-
-    eligible_users.filter()
+                    # TODO:  yeah, error and logic and assumption handling
+                    return (person, candidate, new_meeting_1)
+    return ()
 
 
 
