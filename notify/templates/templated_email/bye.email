@@ -1,0 +1,6 @@
+{% block subject %}Goodbye | NYPL Brew Crew{% endblock %}
+{% block html %}
+  <p>We're sorry to see you leave NYPL Brew Crew, but we understand. You'll no longer receive calendar invites.</p>
+
+  <p>Thanks!</p>
+{% endblock %}

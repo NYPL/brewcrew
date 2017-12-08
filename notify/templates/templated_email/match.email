@@ -1,10 +1,18 @@
-{% block subject %}It's a Match! | NYPL Brew Crew{% endblock %}
 {% block html %}
   <p>Hi, there!</p>
 
   <p>You two are a Brew Crew match! Please contact one another if you need to adjust the meeting time and/or to determine where you'll grab coffee.</p>
 
   <p>If you've been matched with someone who's a bit too far away to meet in person, no problem! Use the link in this invite to meet for a virtual coffee via Google Hangout.</p>
+
+<ul>
+  <li><strong>{{name_one}}</strong><br>
+  By joining Brew Crew, I hope to... {{description_one}}</li>
+<br>
+  <li><strong>{{name_two}}</strong><br>
+  By joining Brew Crew, I hope to... {{description_two}}</li>
+
+<ul>
 
   <p>Thanks!</p>
 {% endblock %}

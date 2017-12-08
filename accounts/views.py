@@ -29,6 +29,7 @@ def index(request):
         content_type='text/html; charset=utf-8'
     )
 
+
 def google_callback(request):
     error = request.GET.get('error')
     if error:
@@ -55,7 +56,10 @@ def google_callback(request):
         id=user, credential = credentials.to_json(), expires_at=expires_at
     )
     credential.save()
-    return HttpResponse("Successfully registered.")
+    return render(
+        request, 'accounts/register-success.html', {},
+        content_type='text/html; charset=utf-8'
+    )
 
 def register(request):
     email = request.POST.get('email')
