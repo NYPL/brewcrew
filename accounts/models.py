@@ -66,9 +66,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     def __str__(self):
-        #TODO: concatenate name and locations
         return ('Name: {name}\n'
-        'Locations: {locations}\n'
+        'Is admin: {is_admin}\n'
         ).format(**self.__dict__)
 
     def get_full_name(self):
