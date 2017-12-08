@@ -1,7 +1,8 @@
+{% block subject %}Hello! | NYPL Brew Crew{% endblock %}
 {% block html %}
   <p>It's official. You've joined NYPL Brew Crew!</p>
 
-  <p>Every two weeks, you’ll be matched with a new Brew Crew member and sent an invite for coffee. If you're a bit too far away to connect in person, no problem! Use the link in the invite to meet via Google Hangout.</p>
+  <p>Every two weeks, you'll be matched with a new Brew Crew member and sent an invite for coffee. If you're a bit too far away to connect in person, no problem! Use the link in the invite to meet via Google Hangout.</p>
 
   <p>Thanks!</p>
 {% endblock %}
