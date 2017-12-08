@@ -1,6 +1,7 @@
 import datetime
 from pdb import set_trace
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
@@ -13,7 +14,7 @@ from .models import (
 
 
 FLOW = flow_from_clientsecrets(
-    'client_secrets.json',
+    settings.GOOGLE_OAUTH_CLIENT_SECRETS,
     scope=[
         'https://www.googleapis.com/auth/calendar',
         'https://www.googleapis.com/auth/userinfo.email',
