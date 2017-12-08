@@ -16,8 +16,12 @@ FLOW = flow_from_clientsecrets(
 
 
 def index(request):
+    return render(
+        request, 'accounts/register.html', {},
+        content_type='text/html; charset=utf-8'
+    )
     authorization_url = FLOW.step1_get_authorize_url()
-    return redirect(authorization_url)
+    # return redirect(authorization_url)
 
 def google_callback(request):
     error = request.GET.get('error')
