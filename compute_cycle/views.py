@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-from .models import Location
-from .models import get_eligible_users, populate_sample_data
+from .models import Location, User
+from .models import find_user_match, get_eligible_users, populate_sample_data
 
 
 def index(request):
@@ -24,3 +24,16 @@ def sasb_users(request):
     users = get_eligible_users(location_ids)
     return HttpResponse("users")
 
+def find_coffee_match(request):
+    person, created = User.objects.get_or_create(name="Chancey", email="chancey@nypl.org")
+    (person, candidate, new_meeting_1) = find_user_match(person)
+
+    body = "<html><body> %s " % person
+    #body += person
+    body += "</br>You Will Coffeeeeeeee</br> at %s " % new_meeting_1
+    #body += new_meeting_1
+    body += "</br>with</br> %s" % candidate
+    #body += candidate
+    body += "</body></html>"
+
+    return HttpResponse(body)
