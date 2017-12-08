@@ -31,8 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'anymail',
     'compute_cycle.apps.ComputeCycleConfig', 
     'accounts.apps.AccountsConfig',
+    'notify.apps.NotifyConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,6 +133,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Email configuration
+from templated_email.backends.vanilla_django import TemplateBackend
+TEMPLATED_EMAIL_BACKEND = TemplateBackend
+
+# Place your API key  and default from email in local_settings.py
+HOST = 'localhost:8000'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'brewcrew@nypl.org'
+SENDGRID_API_KEY = '<your api key>'
 
 # Local settings
 try:

@@ -6,11 +6,11 @@
   <p>If you've been matched with someone who's a bit too far away to meet in person, no problem! Use the link in this invite to meet for a virtual coffee via Google Hangout.</p>
 
 <ul>
-  <li><strong>Christopher Platt</strong><br>
-  By joining Brew Crew, I hope to... learn more about research at NYPL.</li>
+  <li><strong>{{name_one}}</strong><br>
+  By joining Brew Crew, I hope to... {{description_one}}</li>
 <br>
-<li><strong>Bill Kelly</strong><br>
-  By joining Brew Crew, I hope to... connect with colleagues who work in our neighborhood libraries.</li>
+  <li><strong>{{name_two}}</strong><br>
+  By joining Brew Crew, I hope to... {{description_two}}</li>
 
 <ul>
 
