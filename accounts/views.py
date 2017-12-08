@@ -25,9 +25,17 @@ FLOW = flow_from_clientsecrets(
 
 def index(request):
     return render(
+        request, 'accounts/register.html', {},
+        content_type='text/html; charset=utf-8'
+    )
+
+
+def success(request):
+    return render(
         request, 'accounts/register-success.html', {},
         content_type='text/html; charset=utf-8'
     )
+
 
 def google_callback(request):
     error = request.GET.get('error')
