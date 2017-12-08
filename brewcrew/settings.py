@@ -109,6 +109,10 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'accounts.User'
 
 
+# Google OAuth client secrets JSON file
+GOOGLE_OAUTH_CLIENT_SECRETS = 'client_secrets.json'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 

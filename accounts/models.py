@@ -4,13 +4,13 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
-
+from django.contrib.postgres.fields import JSONField
 
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, name, credential, description=None):
+    def create_user(self, email, name, password=None, **kwargs):
         """Creates and saves a User"""
         if not email:
             raise ValueError('User must have an email address')
@@ -18,17 +18,20 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             name=name,
-            description=description,
+            **kwargs,
         )
+        if user.is_admin and not password:
+            raise ValueError("Can't create an admin without a password")
 
+        if password:
+            user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, credential, description=None):
+    def create_superuser(self, email, name, password=None, **kwargs):
         """Creates and saves a superuser"""
         user = self.create_user(
-            email, name, credential,
-            description=description,
+            email, name, password=password, **kwargs
         )
         user.is_admin = True
 
@@ -49,12 +52,14 @@ class Location(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
-    nickname = models.CharField(max_length=255)
+    nickname = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, unique=True)
     description = models.TextField()
+    location_only = models.BooleanField(default=False)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
 
     # acceptable locations for this user to meet at
     locations = models.ManyToManyField(Location)
@@ -79,3 +84,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.name
 
 
+# TODO: Create a flow object for each user.
+
+class Credential(models.Model):
+    id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    credential = JSONField()
+    expires_at = models.DateTimeField()
