@@ -1,13 +1,15 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="brewstyle.css"></head>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/brewstyle.css' %}"></head>
 
 
 <div id="contact-form">
 	<div>
 		<h1>NYPL Brew Crew</h1> 
-		<p>Need more coffee with colleagues in your life? Join NYPL Brew Crew! Every two weeks, you’ll be matched with a new Brew Crew member and sent an invite—<em>automagically</em> based on your Google Calendar availability—to grab a cup of joe.</p>
+		<p>Need more coffee with colleagues in your life? Join NYPL Brew Crew! Every two weeks, you'll be matched with a new Brew Crew member and sent an invite&mdash;<em>automagically</em> based on your Google Calendar availability&mdash;to grab a cup of joe.</p>
 	</div>
 		<p id="failure">Something went wrong... Your information wasn't sent.</p>  
 		<p id="success">Thanks! You're now part of the Brew Crew.</p>
