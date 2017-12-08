@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import Edge
+from .models import Location
 
-admin.site.register(Edge)
+admin.site.register(Location)

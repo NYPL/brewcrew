@@ -10,5 +10,5 @@ def index(request):
 
 def something(Person):
     # for this person, go through all other people, see who they're in group with
+    return 0
 
-    
